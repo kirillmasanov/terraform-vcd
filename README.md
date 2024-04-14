@@ -12,3 +12,5 @@
 `terraform refresh` - Update the state to match remote systems
 
 `terraform graph` - Generate a Graphviz graph of the steps in an operation
+
+`terraform apply -auto-approve`
