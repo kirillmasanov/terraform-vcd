@@ -27,3 +27,23 @@ lifecycle {
 #   ignore_changes = all   # Ignore Changes to Resource Attributes (specific/all)
 }
 ```
+Meta Arguments:
+depends_on
+lifecycle
+count
+
+Count
+```hcl
+resource "local_file" "pet" {
+    filename = var.filename[count.index]
+    count = length(var.filename)
+}
+
+variable "filename" {
+    default = [
+        "/root/pets.txt",
+        "/root/dogs.txt"
+    ]
+}
+
+```
