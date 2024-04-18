@@ -14,5 +14,7 @@
 `terraform refresh` - Update the state to match remote systems
 
 `terraform graph` - Generate a Graphviz graph of the steps in an operation
+* `apt install graphiz -y`
+`terraform graph | dot -Tsvg > graph.svg`
 
 `terraform apply -auto-approve`
