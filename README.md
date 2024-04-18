@@ -18,3 +18,12 @@
 `terraform graph | dot -Tsvg > graph.svg`
 
 `terraform apply -auto-approve`
+
+Lifecycle rules:
+```bash
+lifecycle {
+    create_before_destroy = true  # Create the resource first and tehn destroy older
+#   prevent_destroy = true  # Prevents destroy of a resource
+#   ignore_changes = all   # Ignore Changes to Resource Attributes (specific/all)
+}
+```
