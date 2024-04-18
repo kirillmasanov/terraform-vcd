@@ -7,6 +7,8 @@
 
 `terraform providers` - Show the providers required for this configuration
 
+`terraform providers mirror` - Downloads the providers required for the current configuration and copies them into a directory in the local filesystem
+
 `terraform output` - Show output values from your root module
 
 `terraform refresh` - Update the state to match remote systems
