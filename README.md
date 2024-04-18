@@ -31,6 +31,7 @@ Meta Arguments:
 depends_on
 lifecycle
 count
+for_each
 
 Count
 ```hcl
@@ -45,5 +46,20 @@ variable "filename" {
         "/root/dogs.txt"
     ]
 }
+```
 
+for_each
+```hcl
+resource "local_file" "pet" {
+    filename = each.value
+    for_each = var.filename
+}
+
+variable "filename" {
+    type = set(string)
+    default = [
+        "/root/pets.txt",
+        "/root/dogs.txt"
+    ]
+}
 ```
