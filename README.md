@@ -19,6 +19,20 @@
 
 `terraform apply -auto-approve`
 
+`terraform taint/untaint`
+
+`terraform import <resource_type>.<resource_name> <attribute>`
+
+`terraform get`
+
+```
+terraform state list [options] [address]
+terraform state show [options] [address]
+terraform state mv [options] SOURCE DESTINATION
+terraform state pull
+terraform state rm ADDRESS  # delete items from the terraform state file
+```
+
 Lifecycle rules:
 ```bash
 lifecycle {
@@ -63,3 +77,7 @@ variable "filename" {
     ]
 }
 ```
+
+```
+export TF_LOG=ERROR
+export TF_LOG_PATH=/tmp/ProjectA.log
