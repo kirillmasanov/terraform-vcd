@@ -25,6 +25,14 @@
 
 `terraform get`
 
+`terraform console`
+
+```
+terraform workspace list
+terraform workspace new <workspace_name>
+terraform workspace select <workspace_name>
+```
+
 ```
 terraform state list [options] [address]
 terraform state show [options] [address]
