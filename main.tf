@@ -39,3 +39,54 @@ resource "vcd_network_routed_v2" "terraform-net" {
     end_address   = "192.168.200.254"
   }
 }
+
+### Data sources of catalog ###
+
+data "vcd_catalog" "catalog" {
+  org  = var.vcd_org_org
+  name = "test-vapp"
+}
+
+data "vcd_catalog_vapp_template" "vapp" {
+  org        = var.vcd_org_org
+  catalog_id = data.vcd_catalog.catalog.id
+  name       = "ubuntu-server-22.04"
+}
+
+### Create vApp ###
+
+resource "vcd_vapp" "test" {
+  name = "test"
+}
+
+### Create vApp subnet ###
+
+resource "vcd_vapp_network" "vapp-net" {
+  name          = "test_net"
+  vapp_name     = vcd_vapp.test.name
+  gateway       = "192.168.201.1"
+  prefix_length = "24"
+
+  static_ip_pool {
+    start_address = "192.168.201.2"
+    end_address   = "192.168.201.100"
+  }
+}
+
+### Create vm from template ###
+
+resource "vcd_vapp_vm" "test" {
+  vapp_name = vcd_vapp.test.name
+  name      = "test_vm"
+
+  vapp_template_id = data.vcd_catalog_vapp_template.vapp.id
+  cpus             = 1
+  memory           = 1024
+
+  network {
+    name               = vcd_vapp_network.vapp-net.name
+    type               = "vapp"
+    ip_allocation_mode = "MANUAL"
+    ip                 = "192.168.201.2"
+  }
+}
